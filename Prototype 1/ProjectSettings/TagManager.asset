@@ -13,12 +13,12 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Triggers
+  - Player
+  - Enemy
+  - PlayerInBed
+  - Bed
+  - PlayerInChair
   - 
   - 
   - 
