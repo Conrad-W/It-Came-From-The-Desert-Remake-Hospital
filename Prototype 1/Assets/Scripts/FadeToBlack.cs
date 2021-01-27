@@ -9,18 +9,6 @@ public class FadeToBlack : MonoBehaviour
     //true = Floor 2, false = Floor 1
     private bool topBottomFloor = true;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == 9 || other.gameObject.layer == 13)
@@ -30,6 +18,7 @@ public class FadeToBlack : MonoBehaviour
             StartCoroutine(Teleport());
         }
     }
+
     public IEnumerator FadeBlackOutSquare(int fadeSpeed = 5)
     {
         Color objectColor = blackOutSquare.GetComponent<MeshRenderer>().material.color;

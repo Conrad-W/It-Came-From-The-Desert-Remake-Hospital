@@ -25,25 +25,25 @@ public class ChairSpawn : MonoBehaviour
             {
                 case 1:
                     {
-                        Instantiate(chair, new Vector3(-28, 76, 23), Quaternion.identity);
+                        Instantiate(chair, new Vector3(-28, 75.5f, 23), Quaternion.identity);
                         chairCount++;
                         break;
                     }
                 case 2:
                     {
-                        Instantiate(chair, new Vector3(28, 76, 23), Quaternion.identity);
+                        Instantiate(chair, new Vector3(28, 75.5f, 23), Quaternion.identity);
                         chairCount++;
                         break;
                     }
                 case 3:
                     {
-                        Instantiate(chair, new Vector3(-28, 76, -23), Quaternion.identity);
+                        Instantiate(chair, new Vector3(-28, 75.5f, -23), Quaternion.identity);
                         chairCount++;
                         break;
                     }
                 default:
                     {
-                        Instantiate(chair, new Vector3(28, 76, -23), Quaternion.identity);
+                        Instantiate(chair, new Vector3(28, 75.5f, -23), Quaternion.identity);
                         chairCount++;
                         break;
                     }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemySpawn : MonoBehaviour
 {
+    public Transform[] points;
     public GameObject enemy;
     private int enemyCount;
 
@@ -15,10 +16,9 @@ public class EnemySpawn : MonoBehaviour
 
     private IEnumerator SpawnEnemy()
     {
-        while (enemyCount < 1)
+        for (int i = 0; i < points.Length; i++)
         {
-            Instantiate(enemy, new Vector3(-2.75f,76.0f,7.5f), Quaternion.identity);
-            enemyCount++;
+            Instantiate(enemy, points[i].position, Quaternion.identity);
         }
         yield return null;
 

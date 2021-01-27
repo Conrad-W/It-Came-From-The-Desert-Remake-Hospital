@@ -27,11 +27,23 @@ public class Player : MonoBehaviour
         verticalInput = Input.GetAxis("Vertical");
         speedH = horizontalInput * 5;
         speedV = verticalInput * 5;
+
+        if (chairUpgrade && !bedRadius)
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                gameObject.transform.GetChild(1).transform.parent = null;
+                rigidbodyComponent.position = new Vector3(rigidbodyComponent.position.x, rigidbodyComponent.position.y, rigidbodyComponent.position.z + 1.5f);
+                gameObject.layer = 9;
+                chairUpgrade = false;
+            }
+        }
+
         if (bedRadius && !chairUpgrade && gameObject.layer == 9)
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
-                rigidbodyComponent.position = new Vector3(rigidbodyComponent.position.x, rigidbodyComponent.position.y + 1, rigidbodyComponent.position.z + 1);
+                rigidbodyComponent.position = new Vector3(rigidbodyComponent.position.x, rigidbodyComponent.position.y + 1, rigidbodyComponent.position.z + 1.5f);
                 gameObject.layer = 11;
             }
         }
@@ -39,7 +51,7 @@ public class Player : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
-                rigidbodyComponent.position = new Vector3(rigidbodyComponent.position.x, rigidbodyComponent.position.y - 1, rigidbodyComponent.position.z - 1);
+                rigidbodyComponent.position = new Vector3(rigidbodyComponent.position.x, rigidbodyComponent.position.y - 1, rigidbodyComponent.position.z - 1.5f);
                 gameObject.layer = 9;
             }
         }
@@ -71,6 +83,7 @@ public class Player : MonoBehaviour
         if (other.gameObject.layer == 8)
         {
             other.gameObject.transform.parent = gameObject.transform;
+            other.gameObject.transform.localPosition = new Vector3(0, -1f, 0);
             chairUpgrade = true;
             gameObject.layer = 13;
         }
@@ -78,6 +91,19 @@ public class Player : MonoBehaviour
         if (other.gameObject.layer == 12)
         {
             bedRadius = true;
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.layer == 8)
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                other.gameObject.transform.parent = null;
+                rigidbodyComponent.position = new Vector3(rigidbodyComponent.position.x, rigidbodyComponent.position.y, rigidbodyComponent.position.z + 1.5f);
+                gameObject.layer = 9;
+            }
         }
     }
 

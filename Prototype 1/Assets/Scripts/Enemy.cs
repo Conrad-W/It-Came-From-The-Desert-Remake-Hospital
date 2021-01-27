@@ -8,51 +8,46 @@ public class Enemy : MonoBehaviour
     public NavMeshAgent enemy;
     public Transform enemyPos;
     public Transform player;
+    public Transform[] points;
     private bool playerInRadius;
-    private int path;
+    private int destPoint;
     // Start is called before the first frame update
     void Start()
     {
-        path = Random.Range(1, 2);
+        enemy.autoBraking = false;
+        destPoint = Random.Range(0, 24);
+        GotoNextPoint();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!enemy.pathPending && enemy.remainingDistance < 0.5f)
+        {
+            GotoNextPoint();
+        }
+        
         if (playerInRadius)
         {
             enemy.SetDestination(player.position);
         }
-        else
-        {
-            switch (path)
-            {
-                case 1:
-                    {
-                        enemy.SetDestination(new Vector3(-2.75f,76f,22.75f));
-                        enemy.SetDestination(new Vector3(-27f, 76f, 22.75f));
-                        enemy.SetDestination(new Vector3(-27f, 76f, 17f));
-                        enemy.SetDestination(new Vector3(-36.25f, 76f, 17f));
-                        enemy.SetDestination(new Vector3(-36.25f, 76f, 19f));
-                        //need to add pause here
-                        enemy.SetDestination(new Vector3(-36.25f, 76f, 17f));
-                        enemy.SetDestination(new Vector3(-27f, 76f, 17f));
-                        enemy.SetDestination(new Vector3(-27f, 76f, 7f));
-                        break;
-                    }
-
-            }
-        }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void GotoNextPoint()
     {
-        
+        if (points.Length == 0)
+        {
+            return;
+        }
+
+        enemy.destination = points[destPoint].position;
+
+        destPoint = Random.Range(0, 24);
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.layer == 9 || other.gameObject.layer == 11)
+        if (other.gameObject.layer == 9 || other.gameObject.layer == 11 || other.gameObject.layer == 13)
         {
             playerInRadius = false;
         }
@@ -60,7 +55,7 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.layer == 9)
+        if (other.gameObject.layer == 9 || other.gameObject.layer == 13)
         {
             playerInRadius = true;
         }

@@ -20,14 +20,14 @@ public class DoorR : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        animR["SceneR"].speed = 1.0f;
+        animR["SceneR"].speed = 2.0f;
         animR.Play();
     }
 
     private void OnTriggerExit(Collider other)
     {
         animR["SceneR"].time = 1.0f;
-        animR["SceneR"].speed = -1.0f;
+        animR["SceneR"].speed = -2.0f;
         animR.Play();
     }
 }
